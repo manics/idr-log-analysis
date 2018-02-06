@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.1.1
+    environment:
+      discovery.type: single-node
+      ES_JAVA_OPTS: "-Xmx4096m"
+    networks:
+    - efk
+    ports:
+    - "9200:9200"
+    #- "9300:9300"
+    volumes:
+    - /Users/spli/docker-volumes/idrnginxlogs/es:/usr/share/elasticsearch/data
+
+  fluentd:
+    build: ./fluentd
+    #image: openmicroscopy/fluentd:0.1.0
+    networks:
+    - efk
+    ports:
+    - "24224:24224/udp"
+    - "24224:24224"
+    volumes:
+    #- ./fluentd/fluent.conf:/fluentd/etc/fluent.conf:ro
+    - ./fluentd/:/fluentd/etc/:ro
+    - /Users/spli/docker-volumes/idrnginxlogs/nginx:/idr-nginx-logs:ro
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana-oss:6.1.1
+    networks:
+    - efk
+    ports:
+    - "5601:5601"
+
+networks:
+  efk:
+
+#volumes:

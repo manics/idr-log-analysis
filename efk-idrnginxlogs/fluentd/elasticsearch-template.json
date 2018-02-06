@@ -1,0 +1,11 @@
+{
+  "mappings": {
+    "_default_": {
+      "properties" : {
+        "host": { "type": "ip" },
+        "geoip": { "type": "geo_point" }
+      }
+    }
+  },
+  "template": "logstash-*"
+}
