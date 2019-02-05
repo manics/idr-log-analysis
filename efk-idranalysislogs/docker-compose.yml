@@ -10,6 +10,7 @@ services:
     networks:
     - efk-idranalysis
     volumes:
+    # Elasticsearch database
     - ./volumes/es:/usr/share/elasticsearch/data
 
   fluentd:
@@ -17,9 +18,12 @@ services:
     networks:
     - efk-idranalysis
     volumes:
+    # Fluentd configuration
     - ./fluentd/:/fluentd/etc/:ro
+    # Fluentd file position record
     - ./volumes/fluentd/:/fluentd/pos/
-    - ./haproxy:/idranalysis-haproxy-logs:ro
+    # Aggregated Haproxy HTTP logs
+    - /uod/idr/versions/idr-analysis-logs-combined/:/idranalysis-haproxy-logs/:ro
 
   kibana:
     image: docker.elastic.co/kibana/kibana-oss:6.6.0
@@ -27,13 +31,15 @@ services:
     - efk-idranalysis
 
   nginx:
-    image: library/nginx:1.15.5
+    image: library/nginx:1.15.8
     networks:
     - efk-idranalysis
     ports:
     - "12381:8080"
     volumes:
+    # Nginx configuration
     - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    # Nginx basic auth
     - ./nginx/passwd:/etc/nginx/passwd:ro
 
 networks:
