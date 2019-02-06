@@ -24,6 +24,7 @@ services:
     - ./volumes/fluentd/:/fluentd/pos/
     # Aggregated Haproxy HTTP logs
     - /uod/idr/versions/idr-analysis-logs-combined/:/idranalysis-haproxy-logs/:ro
+    - /uod/idr/versions/nginx-logs-combined/prod-merged-agg/:/idr-nginx-logs:ro
 
   kibana:
     image: docker.elastic.co/kibana/kibana-oss:6.6.0

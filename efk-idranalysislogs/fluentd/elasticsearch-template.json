@@ -1,11 +1,15 @@
 {
   "mappings": {
-    "_default_": {
+    "fluentd": {
       "properties" : {
-        "host": { "type": "ip" },
-        "geoip": { "type": "geo_point" }
+        "host": {
+          "type": "ip"
+        },
+        "geoip": {
+          "type": "geo_point"
+        }
       }
     }
   },
-  "template": "logstash-*"
+  "index_patterns": ["fluentd.nginx.access.*", "fluentd.haproxy.http.*"]
 }
