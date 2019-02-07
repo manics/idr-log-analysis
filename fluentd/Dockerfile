@@ -14,6 +14,7 @@ RUN apk add --update \
         fluent-plugin-slack \
         fluent-plugin-elasticsearch \
         fluent-plugin-geoip \
+        fluent-plugin-flowcounter \
     && sudo gem sources --clear-all \
     && apk del .build-deps \
     && rm -rf /var/cache/apk/* \
