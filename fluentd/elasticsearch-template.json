@@ -1,4 +1,7 @@
 {
+  "settings" : {
+    "number_of_shards" : 1
+  },
   "mappings": {
     "fluentd": {
       "properties" : {
@@ -11,5 +14,5 @@
       }
     }
   },
-  "index_patterns": ["fluentd.nginx.access.*", "fluentd.haproxy.http.*"]
+  "index_patterns": ["fluentd.nginx.access-*", "fluentd.haproxy.http-*"]
 }
