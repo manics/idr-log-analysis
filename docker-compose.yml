@@ -3,7 +3,7 @@ version: "3"
 services:
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.6.0
+    image: amazon/opendistro-for-elasticsearch:0.7.1
     environment:
       discovery.type: single-node
       ES_JAVA_OPTS: "-Xmx4096m"
@@ -29,7 +29,9 @@ services:
     #- ./logs-nginx/:/idr-nginx-logs:ro
 
   kibana:
-    image: docker.elastic.co/kibana/kibana-oss:6.6.0
+    image: amazon/opendistro-for-elasticsearch-kibana:0.7.1
+    environment:
+      ELASTICSEARCH_URL: https://elasticsearch:9200
     networks:
     - efk-idranalysis
 
